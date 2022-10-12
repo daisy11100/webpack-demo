@@ -3,3 +3,4 @@ function testJs(){
 }
 
 testJs();
+import main from './style/main.css'

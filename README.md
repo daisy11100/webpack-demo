@@ -1,3 +1,10 @@
+<!--
+ * @Author: duanxinxin
+ * @Date: 2022-10-12 22:56:13
+ * @LastEditors: duanxinxin
+ * @LastEditTime: 2022-10-12 22:59:55
+ * @Description: 
+-->
 webpack配置   
 ## 基础配置
 ### 1、拆分模块  
@@ -26,9 +33,18 @@ postcss-loader： 做浏览器兼容css用的，需要添加一个postcss.config
 ## 高级配置
 
 ### 1、多入口
-修改entry为多入口   
-修改output的输出文件名[name]（根据入口的属性 输出相应的出口文件名）  
-几个入口文件写相应数量的HtmlWebpackPlugin，chunks中需要配置引入的资源，不写就打包的js会全部引入进去  
+1）修改entry为多入口   
+2）修改output的输出文件名[name]（根据入口的属性 输出相应的出口文件名）  
+3）几个入口文件写相应数量的HtmlWebpackPlugin，chunks中需要配置引入的资源，不写就打包的js会全部引入进去  
+
+### 2、css文件抽离压缩
+#### 抽离  
+dev环境中不需要进行css抽离，继续使用原来的css-loader和style-loader，将产出的css代码插入到页面中  
+prod环境中需要对css文件进行抽离，用到mini-css-extract-plugin这个loader，替换style-loader。即可达到效果
+
+#### 压缩
+使用terser-webpack-plugin和optimize-css-assets-webpack-plugin对其进行压缩  
+在webpack的optimization配置选项中
 
 
 
