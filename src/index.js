@@ -14,3 +14,5 @@ function insertImageElem(imgFile){
 import imgFile from './img/1111.png'
 insertImageElem(imgFile);
 import index from './style/index.css'
+import Test1 from './test';
+Test1('index');

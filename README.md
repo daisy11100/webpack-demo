@@ -47,5 +47,54 @@ prod环境中需要对css文件进行抽离，用到mini-css-extract-plugin这�
 在webpack的optimization配置选项中
 
 
+### 3、抽离公共代码和第三方代码
+#### 公共代码
+A模块中引入了test.js   
+B模块中也引入了test.js   
+test.js就会被打包两次 
+
+
+#### 第三方代码
+比如引入一个swiper.js,我们是希望第三方代码单独打包的   
+因为每次修改一点点业务代码的时候，就会导致重新打包（包含第三方代码），打包很慢   
+但其实第三方代码并没有修改，所以没必要重新打包，因此把第三方代码和业务代码拆开打包    
+第三方代码重新打包的时候就会命中缓存，从而提高打包速度   
+
+#### 代码分割
+主要是在prod环境中，optimization配置下添加部分配置   
+这部分是生成chunks的一些配置
+```
+//代码分割
+        splitChunks:{
+            chunks:'all',
+            // initial:入口chunk,对异步引入的js不做处理
+            // async:异步chunk,只对异步引入的js处理
+            // all：都处理
+
+            //缓存分组
+            cacheGroups:{
+
+                vendor:{
+                    name:'vendor',
+                    priority:1,  //权重 抽离优先级
+                    test:/node_modules/,
+                    minSize:0,  //大小限制  有些过于小的第三方模块没必要单独打包
+                    minChunks:1,  //最少复用几次  打包匹配规则，当复用次数达到这个数量，就单独打包
+                },
+                common:{
+                    name:'common',
+                    priority:0, 
+                    minSize:0,
+                    minChunks:2,
+                }
+            }
+        }
+```
+
+使用chunks的配置在common的htmlwebpackplugin中  
+
+
+
+
 
 
