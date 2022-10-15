@@ -104,6 +104,27 @@ test.js就会被打包两次
 ### 6、处理Vue
 使用vue-loader
 
+## module、chunk和bundle的区别
+module：各源码文件，一切皆模块   
+chunk： 多模块的合成，entry里定义chunk，split定义chunk。分析模块间的引用关系，生成的东西（还没整体的输出）。分析依赖过程中，通过入口生成的模块集合。    
+bundle：最终输出文件
+
+## 性能优化
+### 优化构建打包速度（提高开发体验和效率）
++ 优化babel-loader（用的比较多）
++ IgnorePlugin（避免一些打包）
++ noParse(不去管哪些)
++ happyPack（多进程打包工具）
++ parallelUglifyPlugin(多进程代码压缩)
++ 自动刷新
++ 热更新
++ DllPlugin（第三方库的打包）
+
+#### 优化babel-loader
+cacheDirectory 开启缓存，只要ES6代码没变，就不会重新编译  
+include、exclude：确定打包的范围
+
+### 优化产出代码（产品性能）
 
 
 
