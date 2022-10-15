@@ -14,7 +14,12 @@ module.exports={
                 use:['babel-loader'],
                 include:srcPath,
                 exclude:/node_modules/
-            }
+            },
+            // {
+            //     test:/\.vue$/,
+            //     use:['vue-loader'],
+            //     include:srcPath
+            // }
         ]
     },
     plugins:[

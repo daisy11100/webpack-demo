@@ -93,10 +93,17 @@ test.js就会被打包两次
 
 使用chunks的配置在common的htmlwebpackplugin中  
 
-### 3、懒加载
+### 4、懒加载
 
 在setTimeOut中import需要的js资源即可，返回的是一个promise（是原生支持的语法 ）  
-并且这个异步引入的资源，会单独打包成一个chunk。
+并且这个异步引入的资源，会单独打包成一个chunk。  
+### 5、处理JSX（react）
+使用babel里的preset-react  
+在.babelrc中配置preset-react 
+
+### 6、处理Vue
+使用vue-loader
+
 
 
 
