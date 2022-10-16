@@ -2,7 +2,7 @@
  * @Author: duanxinxin
  * @Date: 2022-10-12 22:56:13
  * @LastEditors: duanxinxin
- * @LastEditTime: 2022-10-12 22:59:55
+ * @LastEditTime: 2022-10-16 19:14:41
  * @Description: 
 -->
 webpack配置   
@@ -123,6 +123,35 @@ bundle：最终输出文件
 #### 优化babel-loader
 cacheDirectory 开启缓存，只要ES6代码没变，就不会重新编译  
 include、exclude：确定打包的范围
+#### happyPack(多进程打包)
+js单线程，所以需要开启多进程打包，提高构件速度。  
+在prod环境下，使用happyPlugin进行配置，替代babel（或其他loader）。
+```
+{
+                test:/\.js$/,
+                //开启缓存
+                use:['happypack/loader?id=babel'],
+                include:srcPath,
+                exclude:/node_modules/
+            },
+```
+```
+//开启多进程打包
+        new HappyPack({
+            //用id来标识当前happypack是用来处理哪一类文件的
+            id:'babel',
+            loaders:['babel-loader?cacheDirectory']
+        })
+```
+#### parallelUglifyPlugin(多进程压缩js)
+webpack内置uglify压缩js   
+parallelUglifyPlugin开启多进程压缩   
+在pulgins中进行配置
+
+#### 关于开启多进程
+项目较大，打包较慢时，开启多进程能提高性能  
+项目较小的时候，打包很快，开启多进程会降低速度（存在进程开销，进程之间还需要通讯）   
+按需使用
 
 ### 优化产出代码（产品性能）
 

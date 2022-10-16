@@ -9,13 +9,13 @@ module.exports={
     },
     module:{
         rules:[
-            {
-                test:/\.js$/,
-                //开启缓存
-                use:['babel-loader?cacheDirectory'],
-                include:srcPath,
-                exclude:/node_modules/
-            },
+            // {
+            //     test:/\.js$/,
+            //     //开启缓存
+            //     use:['babel-loader?cacheDirectory'],
+            //     include:srcPath,
+            //     exclude:/node_modules/
+            // },
             // {
             //     test:/\.vue$/,
             //     use:['vue-loader'],

@@ -9,6 +9,13 @@ module.exports=merge(baseConf,{
     module:{
         rules:[
             {
+                test:/\.js$/,
+                //开启缓存
+                use:['babel-loader?cacheDirectory'],
+                include:srcPath,
+                exclude:/node_modules/
+            },
+            {
                 test:/\.(png|jpg|gif)$/,
                 use:'file-loader'
             },

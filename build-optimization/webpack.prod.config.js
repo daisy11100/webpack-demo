@@ -5,6 +5,8 @@ const MiniCssExtractPlugin=require('mini-css-extract-plugin');
 const webpack =require('webpack');
 const TerserJsPlugin=require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin=require('optimize-css-assets-webpack-plugin')
+const HappyPack=require('happypack');
+const ParallelUglifyPlugin=require('webpack-parallel-uglify-plugin');
 
 module.exports=merge(baseConf,{
     mode:'production',
@@ -16,6 +18,13 @@ module.exports=merge(baseConf,{
     },
     module:{
        rules:[
+            {
+                test:/\.js$/,
+                //开启缓存
+                use:['happypack/loader?id=babel'],
+                include:srcPath,
+                exclude:/node_modules/
+            },
             {
                 test:/\.(png|jpg|gif)$/,
                 use:{
@@ -45,6 +54,26 @@ module.exports=merge(baseConf,{
         //抽离css
         new MiniCssExtractPlugin({
             filename:'css/main.[contenthash:8].css'
+        }),
+        //开启多进程打包
+        new HappyPack({
+            //用id来标识当前happypack是用来处理哪一类文件的
+            id:'babel',
+            loaders:['babel-loader?cacheDirectory']
+        }),
+        new ParallelUglifyPlugin({
+            //还是使用了uglifyJS去压缩代码，只不过开启了多进程
+            uglifyJS:{
+                output:{
+                    beautify:false,  //不需要格式，紧凑输出就行
+                    comments:false, //删除注释
+                },
+                compress:{
+                    drop_console:true,  //删除console
+                    collapse_vars:true,  //内嵌定义了但只使用了一次的变量
+                    reduce_vars:true   //提取多次出现但没定义成变量的静态值
+                }
+            }
         })
     ],
     optimization:{
