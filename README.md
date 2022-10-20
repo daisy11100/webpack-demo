@@ -192,6 +192,27 @@ DllPlugin   --先把需要优化的对象,比如react去打包成dll文件
 DllReferencePlugin --把dll文件引入
 
 ### 优化产出代码（产品性能）
+图片base64编码  --小于5kb的图片使用base64产出，减少网络请求   
+bundle加hash  --如果代码不变，hash值不变，加载会命中缓存，提高加载速度   
+懒加载  --较大的文件可以使用懒加载   
+提取公共代码  --第三方和公共代码可以提取出来单独打包   
+IgnorePlugin  --打包出来的代码更少一点   
+使用cdn加速   --加publicPath，修改所有静态文件的路径为cdn路径。需要把打包的cdn路径资源上传到cdn上，使其可访问。   
+使用production  --mode在production会自动开启代码压缩，vue、react会删除一些调试代码，启动tree shaking    
+使用scope hosting --
+
+#### 什么是Tree Shaking
+去除无用代码   
+但必须用ES6module才能让tree-shaking生效，commonjs不行  
+
+
+#### ES6 module和commonjs的区别
+ES6 module：是静态引入，编译时引用。不能通过代码变量去引用    
+commonjs：动态引入，执行时引用   
+只有ES6 module才能静态分析，去确定无用代码，所以才能实现tree-shaking    
+
+
+
 
 
 
