@@ -61,11 +61,24 @@ module.exports=merge(baseConf,{
             id:'babel',
             loaders:['babel-loader?cacheDirectory']
         }),
+        //压缩js    
+        // new UglifyJSPlugin({
+        //     compress:{
+        //         warning:false,  //删除无用代码时不警告
+        //         drop_console:true,   //删除console
+        //         collapse_vars:true,  //内嵌定义了但只使用了一次的变量
+        //         reduce_vars:true    //提取使用多次但未定义成变量的静态值
+        //     },
+        //     output:{
+        //         beautify:false,  //紧凑输出
+        //         comments:false, //删除评论
+        //     }
+        // }),
         new ParallelUglifyPlugin({
             //还是使用了uglifyJS去压缩代码，只不过开启了多进程
             uglifyJS:{
                 output:{
-                    beautify:false,  //不需要格式，紧凑输出就行
+                    beautify:false,  //紧凑输出
                     comments:false, //删除注释
                 },
                 compress:{
@@ -78,7 +91,17 @@ module.exports=merge(baseConf,{
     ],
     optimization:{
         // 压缩css
-        minimizer:[new TerserJsPlugin({}),new OptimizeCssAssetsPlugin({})],
+        minimizer:[
+            new TerserJsPlugin({
+                parallel:true,
+                terserOptions:{
+                    toplevel:true,
+                    ie8:true,
+                    safari10:true
+                }
+            }),
+            new OptimizeCssAssetsPlugin({})
+        ],
         //代码分割
         splitChunks:{
             chunks:'all',

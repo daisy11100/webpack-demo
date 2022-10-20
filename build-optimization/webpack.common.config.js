@@ -23,6 +23,13 @@ module.exports={
             // }
         ]
     },
+    //文件监听，文件改动后触发编译
+    // watch:true,
+    // watchOptions:{
+    //     ignored:/node_modules/,
+    //     aggregateTimeout:300,
+    //     poll:1000
+    // },
     plugins:[
         //生成html页面
         new HtmlWebpackPlugin({

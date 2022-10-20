@@ -2,6 +2,7 @@ const {merge} = require('webpack-merge');
 const baseConf=require('./webpack.common.config');
 const {srcPath,distPath}=require('./path');
 const webpack = require('webpack');
+const HotModuleReplacementPlugin=require('webpack/lib/HotModuleReplacementPlugin');
 
 
 module.exports=merge(baseConf,{
@@ -31,9 +32,12 @@ module.exports=merge(baseConf,{
     plugins:[
         new webpack.DefinePlugin({
             ENV:JSON.stringify('development')
-        })
+        }),
+        new HotModuleReplacementPlugin()
     ],
     devServer:{
-        port:8080
+        port:8080,
+        //自动更新
+        hot:true
     }
 })
