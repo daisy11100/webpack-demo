@@ -123,7 +123,12 @@ bundle：最终输出文件
 #### 优化babel-loader
 cacheDirectory 开启缓存，只要ES6代码没变，就不会重新编译  
 include、exclude：确定打包的范围
+#### IgnorePlugin（避免一些打包）
+生产模式可用
+#### noParse
+生产模式可用
 #### happyPack(多进程打包)
+生产模式可用
 js单线程，所以需要开启多进程打包，提高构件速度。  
 在prod环境下，使用happyPlugin进行配置，替代babel（或其他loader）。
 ```
@@ -144,6 +149,7 @@ js单线程，所以需要开启多进程打包，提高构件速度。
         })
 ```
 #### parallelUglifyPlugin(多进程压缩js)
+一般生产模式,不用于本地环境
 webpack内置uglify压缩js   
 parallelUglifyPlugin开启多进程压缩   
 在pulgins中进行配置
@@ -154,13 +160,36 @@ parallelUglifyPlugin开启多进程压缩
 按需使用
 
 #### 自动刷新
+开发环境
 在配置中设置watch为true即会开启自动刷新
 webpack-dev-server 也会自动开启
 
 #### 热更新
-自动刷新是网页全部更新，状态会丢失（表单内容）
+开发环境
+自动刷新是网页全部更新，状态会丢失（表单内容）  
 热更新：新代码生效、网页不刷新、状态不丢失
+```
+// webpack.dev.js
+module.exports = {
+  devServer: {
+    compress: true,
+    hot: true // 开启配置
+  },
+  
+  
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+}
+```
 
+#### DllPlugin（第三方库的打包）
+不用于生产环境
+Dll动态链接库   
+react、vue体积较大，构建较慢，但不常更新。所以只需构建一次，不需要每次构建打包。      
+
+DllPlugin   --先把需要优化的对象,比如react去打包成dll文件   
+DllReferencePlugin --把dll文件引入
 
 ### 优化产出代码（产品性能）
 

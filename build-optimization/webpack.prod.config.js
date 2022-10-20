@@ -93,7 +93,7 @@ module.exports=merge(baseConf,{
         // 压缩css
         minimizer:[
             new TerserJsPlugin({
-                parallel:true,
+                // parallel:true,
                 terserOptions:{
                     toplevel:true,
                     ie8:true,
