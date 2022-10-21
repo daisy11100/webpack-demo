@@ -7,6 +7,7 @@ const TerserJsPlugin=require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin=require('optimize-css-assets-webpack-plugin')
 const HappyPack=require('happypack');
 const ParallelUglifyPlugin=require('webpack-parallel-uglify-plugin');
+const ModuleConcatenationPlugin=require('webpack/lib/optimize/ModuleConcatenationPlugin')
 
 module.exports=merge(baseConf,{
     mode:'production',
@@ -46,6 +47,10 @@ module.exports=merge(baseConf,{
                 ]
             }
        ] 
+    },
+    resolve:{
+        //优先采用jsnext：main中指向的ES6模块法语法的文件
+        mainFields:['jsnext:main']
     },
     plugins:[
         new webpack.DefinePlugin({
@@ -87,7 +92,9 @@ module.exports=merge(baseConf,{
                     reduce_vars:true   //提取多次出现但没定义成变量的静态值
                 }
             }
-        })
+        }),
+        //开启scope hoisting
+        new ModuleConcatenationPlugin()
     ],
     optimization:{
         // 压缩css

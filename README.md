@@ -199,7 +199,7 @@ bundle加hash  --如果代码不变，hash值不变，加载会命中缓存，�
 IgnorePlugin  --打包出来的代码更少一点   
 使用cdn加速   --加publicPath，修改所有静态文件的路径为cdn路径。需要把打包的cdn路径资源上传到cdn上，使其可访问。   
 使用production  --mode在production会自动开启代码压缩，vue、react会删除一些调试代码，启动tree shaking    
-使用scope hosting --
+使用scope hoisting --让多个函数合并为一个，减少作用域，执行会更快一点
 
 #### 什么是Tree Shaking
 去除无用代码   
@@ -210,6 +210,14 @@ IgnorePlugin  --打包出来的代码更少一点
 ES6 module：是静态引入，编译时引用。不能通过代码变量去引用    
 commonjs：动态引入，执行时引用   
 只有ES6 module才能静态分析，去确定无用代码，所以才能实现tree-shaking    
+
+#### scope hoisting
+多个函数合并成一个  
+体积更小   
+创建函数作用域少    
+条件：由于需要分析模块间的依赖关系，所以源码必须是采用了ES6模块化的
+
+
 
 
 
