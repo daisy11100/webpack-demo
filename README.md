@@ -217,6 +217,51 @@ commonjs：动态引入，执行时引用
 创建函数作用域少    
 条件：由于需要分析模块间的依赖关系，所以源码必须是采用了ES6模块化的
 
+## babel
+作用：把ES6转化成ES5代码   
+使用：安装一些core、polyfill等插件，配置.babelrc文件   
+babel其实是一个工具，然后是通过plugin去转一些代码，比如a plugin的转ES5，b plugin等等  
+preset：将一些plugin作为预设  
+
+### babel-polyfill
+polyfill 补丁  
+core-js：polyfill的集合，所有新语法的集合
+regenerator：generator（处理异步的函数）的补丁  
+babel-polyfill：core-js和regenerator的集合   
+babel7.4之后弃用babel-polyfill，推荐直接使用core-js和regenerator      
+
+### babel-polyfill的问题
+#### 污染全局环境 
+打补丁的过程，会在window，或者原型上重置方法，这样会影响到其他地方的使用。   
+如果做第三库，重新定义方法，会影响使用方的代码逻辑
+
+#### babel-runtime  
+和polyfill同样的作用，但是在方法名上会定义特别一些，不会重置之前的方法，也就是不会污染全局  
+
+## 面试题 
+### 前端会何要进行打包和构建   
++ 体积更小（tree-shaking、压缩、合并），加载更快  
++ 可以使用更高级的语言或语法（ES6，TS，scss），提高开发效率，webpack编译成低级的语法适应兼容浏览器
++ 兼容性和错误检查（polyfill，ESlint，postcss）  
+
+研发流程方面（前端工程化方面）
++ 统一、高效的开发环境 
++ 统一的构建流程和产出标准
++ 集成公司的构建规范
+
+### module 、chunk和bundle的区别  
+module就是我们所说的模块，比如js文件，css文件等   
+chunks就是模块的集合，构建过程中的中间产物，比如通过splitchunks会分割代码，将不同的模块合并，产生chunks   
+bundle就是最后打包的最终产物 
+
+
+### loader和plugin的区别 
+loader：模块转换器，less-css，将匹配的文件转义成相应的格式   
+plugin：扩展插件，比如htmlWebpackPlugin
+
+### 常见的loader和plugin
+loader：babel-loader，css-loader，style-loader，postcss-loader，sass-loader、url-loader，vue-loader   
+plugin：htmlWebpackPlugin、TerserJsPlugin（压缩js）、MiniCssExtractPlugin（抽离css）、OptimizeCssAssetsPlugin（压缩css）、HappyPack、ParallelUglifyPlugin、HotModuleReplacementPlugin
 
 
 
