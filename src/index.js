@@ -1,3 +1,10 @@
+import index from './style/index.css'
+import Test1 from './test';
+import imgFile from './img/1111.png'
+import moment from 'moment';
+
+let t = moment().endOf('day').fromNow()
+console.log(t)
 class Test{
     constructor(){
         document.write('hello,world')
@@ -11,10 +18,7 @@ function insertImageElem(imgFile){
     document.body.appendChild(img);
 }
 
-import imgFile from './img/1111.png'
 insertImageElem(imgFile);
-import index from './style/index.css'
-import Test1 from './test';
 Test1('index');
 //引入动态数据
 setTimeout(()=>{

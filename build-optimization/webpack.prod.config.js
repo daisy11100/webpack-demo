@@ -94,7 +94,12 @@ module.exports=merge(baseConf,{
             }
         }),
         //开启scope hoisting
-        new ModuleConcatenationPlugin()
+        new ModuleConcatenationPlugin(),
+        //忽略local目录的打包
+        new webpack.IgnorePlugin({
+            resourceRegExp: /\.\/locale/,
+            contextRegExp: /moment/,
+        })
     ],
     optimization:{
         // 压缩css

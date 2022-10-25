@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-# webpack-demo
-webpack学习笔记
-=======
 <!--
  * @Author: duanxinxin
  * @Date: 2022-10-12 22:56:13
  * @LastEditors: duanxinxin
- * @LastEditTime: 2022-10-16 19:14:41
+ * @LastEditTime: 2022-10-25 11:20:27
  * @Description: 
 -->
 webpack配置   
@@ -32,7 +28,8 @@ style-loader：是将生成的css文件插入到页面中
 postcss-loader： 做浏览器兼容css用的，需要添加一个postcss.config.js文件，其中熟知的autoprefixer就是为样式添加前缀   
 
 ### 5、关于图片
-
+dev情况下不做处理，使用file-loader引入图片   
+prod情况下，使用url-loader，对小于5kb的图片，将其转成base64，减少http请求，提高页面性能
 
 ## 高级配置
 
@@ -275,4 +272,3 @@ plugin：htmlWebpackPlugin、TerserJsPlugin（压缩js）、MiniCssExtractPlugin
 
 
 
->>>>>>> a9bf69a83ab2c87d5c1b74792a966c7c5b77a584

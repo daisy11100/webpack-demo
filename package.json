@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "babel-loader": "^8.2.5",
-    "mini-css-extract-plugin": "^2.6.1"
+    "mini-css-extract-plugin": "^2.6.1",
+    "moment": "^2.29.4"
   }
 }

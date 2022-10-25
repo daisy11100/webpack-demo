@@ -37,6 +37,7 @@ module.exports=merge(baseConf,{
     ],
     devServer:{
         port:8080,
+        // inline: inline,
         //自动更新
         hot:true
     }
