@@ -2,7 +2,7 @@
  * @Author: duanxinxin
  * @Date: 2022-10-12 22:56:13
  * @LastEditors: duanxinxin
- * @LastEditTime: 2022-10-25 11:20:27
+ * @LastEditTime: 2022-10-25 22:30:28
  * @Description: 
 -->
 webpack配置   
@@ -263,6 +263,44 @@ plugin：扩展插件，比如htmlWebpackPlugin
 ### 常见的loader和plugin
 loader：babel-loader，css-loader，style-loader，postcss-loader，sass-loader、url-loader，vue-loader   
 plugin：htmlWebpackPlugin、TerserJsPlugin（压缩js）、MiniCssExtractPlugin（抽离css）、OptimizeCssAssetsPlugin（压缩css）、HappyPack、ParallelUglifyPlugin、HotModuleReplacementPlugin
+### babel和webpack的区别
+babel：js新语法编译工具  不关心模块化  
+webpack：打包构建工具，是loader和plugin的集合，他的作用取决于安装的loader和plugin  
+
+
+### babel-polyfill和babel-runtime
+babel-polyfill 会污染全局    
+babel-runtime 不会污染全局    
+产出第三方lib使用babel-runtime   
+### 如何使用懒加载  
+使用import 然后结合react和vue的异步组件   
+### 为何proxy不能被polyfill  
+比如class可以通过function 模拟  
+比如promise可以用callback来模拟    
+但是proxy的功能用object.defineProperty模拟   
+
+
+### 优化构建速度（可用于生产环境）
++ 优化babel-loader 
++ noParse
++ IgnorePlugin 
++ happyPack
++ parallelUglifyPlugin
+
+### 优化构建速度（不可用于生产环境）
++ 自动刷新 
++ 热更新
++ dllPlugin
+
+### 优化输出代码 
++ 小图片base64编码
++ bundle加hash
++ 懒加载
++ 提取公共代码 
++ 使用cdn加速 
++ 使用production
++ 使用scope hosting
+
 
 
 
