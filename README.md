@@ -2,7 +2,7 @@
  * @Author: duanxinxin
  * @Date: 2022-10-12 22:56:13
  * @LastEditors: duanxinxin
- * @LastEditTime: 2022-10-25 22:30:28
+ * @LastEditTime: 2022-11-03 20:05:43
  * @Description: 
 -->
 webpack配置   
@@ -300,6 +300,10 @@ babel-runtime 不会污染全局
 + 使用cdn加速 
 + 使用production
 + 使用scope hosting
+
+
+
+
 
 
 
